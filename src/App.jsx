@@ -16,11 +16,13 @@ function App() {
     setScreen('question');
   };
 
-  const handleAnswerClick = (isCorrect) => {
+  const handleAnswerClick = (isCorrect, selectedOption) => {
     const details = {
-      question: currentCountry.name,
+      question: currentCountry,
       correctAnswer: currentCountry.name,
       userAnswer: isCorrect ? 'Correct!' : 'Incorrect!',
+      selectedAnswer: selectedOption,
+
     };
     setQuestionDetails((prevDetails) => [...prevDetails, details]);
 
@@ -28,7 +30,6 @@ function App() {
     setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
     setScreen('result');
   };
-
 
   const nextQuestion = () => {
     setSelectedAnswer(null);
@@ -45,6 +46,7 @@ function App() {
   const restartGame = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
+    setQuestionDetails([]); 
     setScreen('question');
   };
 
@@ -55,7 +57,7 @@ function App() {
 
   const hideQuestionDetails = () => {
     setShowDetails(false);
-    setScreen('question');
+    setScreen('end');
   };
 
   const currentCountry = countries[currentQuestionIndex];
@@ -71,7 +73,9 @@ function App() {
       .slice(0, 3);
     const randomIndex = Math.floor(Math.random() * 4);
     answerOptions.splice(randomIndex, 0, shuffledCountries[correctCountryIndex]);
+    console.log(answerOptions);
     return answerOptions;
+
   }
 
   const downloadDetailsAsCSV = () => {
@@ -96,7 +100,6 @@ function App() {
     <div className="screen">
       {screen === 'start' && (
         <div className="screen">
-
           <div className="game-container">
             <div className="header">
               <h1>Flag Quiz</h1>
@@ -105,10 +108,8 @@ function App() {
               </button>
             </div>
             <p>Test your knowledge of world flags!</p>
-
           </div>
         </div>
-
       )}
 
       {screen === 'question' && (
@@ -128,18 +129,12 @@ function App() {
           </div>
           <p className="game-status-display">Which country is represented by this flag?</p>
           <ProgressBar round={currentQuestionIndex + 1} roundsTotal={totalQuestions} />
-
           <div className="question-container">
             <div className="flag">
               <img
                 src={`https://flagcdn.com/80x60/${currentCountry.ISOCode}.png`}
                 alt={currentCountry.name}
-                style={{
-                  width: '75px',
-                  height: '58px',
-                }}
               />
-
             </div>
             <div className="answers-container">
               {answerOptions.map((country, index) => (
@@ -147,7 +142,7 @@ function App() {
                   key={index}
                   className={`answer-button ${selectedAnswer !== null ? (country === currentCountry ? 'correct' : 'incorrect') : ''
                     }`}
-                  onClick={() => handleAnswerClick(country === currentCountry)}
+                  onClick={() => handleAnswerClick(country === currentCountry, country.name)}
                 >
                   {country.name}
                 </button>
@@ -174,7 +169,8 @@ function App() {
           <div className="header">
             <h1>FLAGS QUIZ</h1>
             <button className="btn start" onClick={restartGame}>
-              START GAME
+              RESTART
+               GAME
             </button>
           </div>
           <p>Game Over</p>
@@ -206,30 +202,37 @@ function App() {
         </div>
       )}
 
-
       {screen === 'detail' && (
         <div className="details-screen">
-          <h2>All Question Details</h2>
-          <table className="details-table">
-            <thead>
-              <tr>
-                <th>Question</th>
-                <th>Correct Answer</th>
-                <th>Your Answer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {questionDetails.map((detail, index) => (
-                <tr key={index}>
-                  <td>{detail.question}</td>
-                  <td>{detail.correctAnswer}</td>
-                  <td className={detail.userAnswer === 'Correct!' ? 'correct-answer' : 'incorrect-answer'}>
-                    {detail.userAnswer}
-                  </td>
+          <h2>Details</h2>
+          <div className="details-table-container">
+            <table className="details-table">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Selected answer</th>
+                  <th>Your Answer</th>
+                  <th>Correct Answer</th>
+
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {questionDetails.map((detail, index) => (
+                  <tr key={index}>
+                    <td><img
+                      src={`https://flagcdn.com/40x30/${detail.question.ISOCode}.png`}
+                      alt={detail.question.name}
+                    /></td>
+                    <td>{detail.selectedAnswer}</td>
+                    <td className={detail.userAnswer === 'Correct!' ? 'correct-answer' : 'incorrect-answer'}>
+                      {detail.userAnswer}
+                    </td>
+                    <td>{detail.correctAnswer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <div className="button-container">
             <button className="btn" onClick={downloadDetailsAsCSV}>
               Download CSV

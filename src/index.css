@@ -9,7 +9,7 @@
     font-family: 'Ubuntu', sans-serif;
     --dark: #212738;
     --light: #EDF2EF;
-    --primary:  #D1D646;
+    --primary: #D1D646;
     --secondary: #57C4E5;
 }
 
@@ -32,8 +32,8 @@ body {
 
 .game-container {
     background: var(--light);
-    width: 400px;
-    max-width: 80%;
+    max-width: 400px;
+    width: 90%;
     margin: 0 auto;
     padding: 1em 2em;
     display: flex;
@@ -51,7 +51,11 @@ body {
     align-items: center;
     border-bottom: 1px solid var(--dark);
     padding-bottom: 1em;
-} 
+}
+
+.flag {
+    margin: 20px;
+}
 
 h1 {
     font-size: 1.4rem;
@@ -133,7 +137,7 @@ h1 {
     cursor: pointer;
     font-weight: 500;
     background: var(--primary);
-    color: var(--dark)
+    color: var(--dark);
 }
 
 .answer-button:disabled {
@@ -145,7 +149,7 @@ h1 {
 
 .button-container {
     display: flex;
-} 
+}
 
 .btn {
     margin: 1em;
@@ -179,100 +183,74 @@ h1 {
 }
 
 .details-screen {
+    margin-top: 3em;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: var(--light);
-    width: 80%;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    box-shadow: 0 0 20px #ccc;
-    padding: 1em 2em;
-    text-align: center;
-  }
-  
-  .details-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1em;
-  }
-  
-  .details-table th, .details-table td {
-    padding: 0.5em;
-    border: 1px solid var(--dark);
-  }
-  
-  .details-table th {
-    background: var(--primary);
-    color: var(--dark);
-  }
-  
-  .details-table td {
-    background: var(--light);
-  }
-  
-  .correct-answer {
-    color: green;
-  }
-  
-  .incorrect-answer {
-    color: red;
-  }
-  
-  .details-screen {
-    background: var(--light);
-    width: 100%;
-    max-width: 400px; 
-    border-radius: 10px;
-    box-shadow: 0 0 20px #ccc;
-    padding: 1em;
-    text-align: center;
+}
+
+.details-screen h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+.details-table-container {
+    max-width: 500px;
+    width: 90%;
 }
 
 .details-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1em;
+    table-layout: fixed;
 }
 
-.details-table th, .details-table td {
-    padding: 0.8em;
+.details-table th,
+.details-table td {
+    padding: 0.5em;
+    text-align: center;
     border: 1px solid var(--dark);
 }
 
 .details-table th {
     background: var(--primary);
     color: var(--dark);
-}
-
-.details-table td {
-    background: var(--light);
+    font-weight: 700;
 }
 
 .correct-answer {
-    color: green;
+    color: var(--primary);
 }
 
 .incorrect-answer {
     color: red;
 }
 
-/* Mobile responsiveness */
-@media screen and (max-width: 600px) {
-    .game-container, .details-screen {
+@media only screen and (max-width: 600px) {
+
+    .game-container,
+    .details-screen {
         max-width: 92%;
     }
 
-    .question-container, .details-screen {
+    .question-container,
+    .details-screen {
         padding: 0.5em;
     }
 
-    .flag {
-        padding: 1em;
-        height: 80px;
+    .details-table-container {
+        width: 100%;
+        max-width: none;
+        table-layout: fixed;
+
     }
 
-    .details-table th, .details-table td {
-        padding: 0.5em;
-        font-size: 0.9rem; 
+    .details-table {
+        word-wrap: break-word;
+        font-size: 0.7rem;
     }
 }
-
-

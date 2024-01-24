@@ -2,8 +2,8 @@ const ProgressBar = (props) => {
   const progress = Math.floor(((props.round - 1) / props.roundsTotal) * 100) + "%";
 
   const trackDivStyle = {
-    width: "80%",
-    height: "5px",
+    width: "90%",
+    height: "7px",
     backgroundColor: "#212738",
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",

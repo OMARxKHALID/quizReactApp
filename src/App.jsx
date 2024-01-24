@@ -31,7 +31,6 @@ function App() {
       setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
     }
   };
-  
 
   const restartGame = () => {
     setCurrentQuestionIndex(0);
@@ -69,9 +68,8 @@ function App() {
     const answerOptions = shuffledCountries
       .filter((_, index) => index !== correctCountryIndex)
       .slice(0, 3);
-    const randomIndex = Math.floor(Math.random() * 4);
-    answerOptions.splice(randomIndex, 0, shuffledCountries[correctCountryIndex]);
-    return answerOptions;
+    answerOptions.push(currentCountry);
+    return  answerOptions;
   };
 
   const currentCountry = shuffledCountries[currentQuestionIndex];
@@ -124,7 +122,8 @@ function App() {
           <p className="score-num">{currentQuestionIndex + 1}</p>
         </div>
       </div>
-      <p className="game-status-display">Which country is represented by this flag?</p>
+      <p className="game-status-display">
+        Which country is represented by this flag?</p>
       <ProgressBar round={currentQuestionIndex + 1} roundsTotal={totalQuestions} />
       <div className="question-container">
         <div className="flag">

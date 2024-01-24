@@ -5,7 +5,7 @@
 }
 
 :root {
-    font-size: 17px;
+    font-size: 16px;
     font-family: 'Ubuntu', sans-serif;
     --dark: #212738;
     --light: #EDF2EF;
@@ -21,10 +21,11 @@ body {
         linear-gradient(45deg, rgb(252, 252, 252) 25%, transparent 25%);
     background-size: 100px 100px;
     background-color: white;
+    overflow-y: hidden; 
 }
 
 .screen {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,7 +100,7 @@ h1 {
 
 .question-container {
     background: var(--light);
-    width: 80%;
+    width: 90%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     box-shadow: 0 0 20px #ccc;
@@ -109,11 +110,6 @@ h1 {
     background: var(--dark);
     padding: 0.7em;
     border-radius: 10px;
-}
-
-.flag {
-    padding: 3em;
-    height: 150px;
 }
 
 .answer-button {
@@ -279,3 +275,5 @@ h1 {
         font-size: 0.9rem; 
     }
 }
+
+

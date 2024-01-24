@@ -131,10 +131,15 @@ function App() {
 
           <div className="question-container">
             <div className="flag">
-              <img
-                src={`https://flagcdn.com/96x72/${currentCountry.ISOCode}.png`}
-                alt={currentCountry.name}
-              />
+            <img
+  src={`https://flagcdn.com/80x60/${currentCountry.ISOCode}.png`}
+  alt={currentCountry.name}
+  style={{
+    width: '75px', 
+    height: '58px', 
+  }}
+/>
+
             </div>
             <div className="answers-container">
               {answerOptions.map((country, index) => (
@@ -202,7 +207,7 @@ function App() {
       )}
 
 
-{screen === 'detail' && (
+           {screen === 'detail' && (
         <div className="details-screen">
           <h2>All Question Details</h2>
           <table className="details-table">

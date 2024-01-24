@@ -21,7 +21,6 @@ body {
         linear-gradient(45deg, rgb(252, 252, 252) 25%, transparent 25%);
     background-size: 100px 100px;
     background-color: white;
-    overflow-y: hidden; 
 }
 
 .screen {

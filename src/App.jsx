@@ -3,8 +3,6 @@ import countries from './countries';
 import ProgressBar from './ProgressBar.jsx';
 import { saveAs } from 'file-saver';
 
-const shuffledCountries = [...countries].sort(() => Math.random() - 0.5);
-
 function App() {
   const [screen, setScreen] = useState('start');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -12,23 +10,34 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const totalQuestions = 5;
   const [questionDetails, setQuestionDetails] = useState([]);
+  const [shuffledCountries, setShuffledCountries] = useState([]);
 
   const startGame = () => {
+    setShuffledCountries([...countries].sort(() => Math.random() - 0.5));
     setScreen('question');
   };
 
   const handleAnswerClick = (isCorrect, selectedOption) => {
-    const currentCountry = shuffledCountries[currentQuestionIndex];
-    const details = {
-      question: currentCountry,
-      correctAnswer: currentCountry.name,
-      userAnswer: isCorrect ? 'Correct!' : 'Incorrect!',
-      selectedAnswer: selectedOption,
-    };
-    setQuestionDetails((prevDetails) => [...prevDetails, details]);
-    setSelectedAnswer(isCorrect);
-    setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
-    setScreen('result');
+    if (selectedAnswer === null) {
+      const currentCountry = shuffledCountries[currentQuestionIndex];
+      const details = {
+        question: currentCountry,
+        correctAnswer: currentCountry.name,
+        userAnswer: isCorrect ? 'Correct!' : 'Incorrect!',
+        selectedAnswer: selectedOption,
+      };
+      setQuestionDetails((prevDetails) => [...prevDetails, details]);
+      setSelectedAnswer(isCorrect);
+      setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
+    }
+  };
+  
+
+  const restartGame = () => {
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuestionDetails([]);
+    setScreen('question');
   };
 
   const nextQuestion = () => {
@@ -39,15 +48,9 @@ function App() {
     if (currentQuestionIndex === totalQuestions - 1) {
       setScreen('end');
     } else {
+      setShuffledCountries([...countries].sort(() => Math.random() - 0.5));
       setScreen('question');
     }
-  };
-
-  const restartGame = () => {
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setQuestionDetails([]);
-    setScreen('question');
   };
 
   const showQuestionDetails = () => {
@@ -133,28 +136,23 @@ function App() {
         <div className="answers-container">
           {answerOptions.map((country, index) => (
             <button
-              key={index}
-              className={`answer-button ${selectedAnswer !== null ? (country === currentCountry ? 'correct' : 'incorrect') : ''
-                }`}
-              onClick={() => handleAnswerClick(country === currentCountry, country.name)}
-            >
-              {country.name}
-            </button>
+            key={index}
+            className={`answer-button ${selectedAnswer !== null ? (country === currentCountry ? 'correct' : 'incorrect') : ''}`}
+            onClick={() => handleAnswerClick(country === currentCountry, country.name)}
+            disabled={selectedAnswer !== null}
+          >
+            {country.name}
+          </button>
           ))}
         </div>
       </div>
-    </div>
-  );
-
-  const renderResultScreen = () => (
-    <div className="game-container">
-      <div>
-        <p className="result-message">{selectedAnswer ? 'Correct!' : 'Incorrect!'}</p>
-        <p className="score">Score: {score}</p>
-        <button className="btn" onClick={nextQuestion}>
-          Next Question
-        </button>
-      </div>
+      <button
+        className="btn"
+        onClick={nextQuestion}
+        disabled={selectedAnswer === null}
+      >
+        Next
+      </button>
     </div>
   );
 
@@ -240,7 +238,6 @@ function App() {
     <div className="screen">
       {screen === 'start' && renderStartScreen()}
       {screen === 'question' && renderQuestionScreen()}
-      {screen === 'result' && renderResultScreen()}
       {screen === 'end' && renderEndScreen()}
       {screen === 'detail' && renderDetailScreen()}
     </div>

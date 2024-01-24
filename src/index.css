@@ -147,6 +147,16 @@ h1 {
     color: var(--light);
 }
 
+.answer-button.correct:hover {
+    background: var(--primary);
+    color: var(--dark);
+}
+
+.answer-button.incorrect:hover {
+    background: red;
+    color: var(--light);
+}
+
 .button-container {
     display: flex;
 }

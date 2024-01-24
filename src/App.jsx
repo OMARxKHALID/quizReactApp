@@ -69,8 +69,16 @@ function App() {
       .filter((_, index) => index !== correctCountryIndex)
       .slice(0, 3);
     answerOptions.push(currentCountry);
-    return  answerOptions;
+  
+    // Fisher-Yates (Knuth) Shuffle
+    for (let i = answerOptions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answerOptions[i], answerOptions[j]] = [answerOptions[j], answerOptions[i]];
+    }
+  
+    return answerOptions;
   };
+  
 
   const currentCountry = shuffledCountries[currentQuestionIndex];
   const answerOptions = getAnswerOptions();

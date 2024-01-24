@@ -82,16 +82,16 @@ function App() {
         questionDetails.map(detail =>
           `${detail.question},${detail.correctAnswer},${detail.userAnswer}\n`
         ).join('');
-  
+
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
       saveAs(blob, 'question_details.csv');
     } catch (error) {
       console.error('Error generating or downloading CSV:', error);
-      
+
     }
   };
-  
-    
+
+
   return (
     <div className="screen">
       {screen === 'start' && (
@@ -131,14 +131,14 @@ function App() {
 
           <div className="question-container">
             <div className="flag">
-            <img
-  src={`https://flagcdn.com/80x60/${currentCountry.ISOCode}.png`}
-  alt={currentCountry.name}
-  style={{
-    width: '75px', 
-    height: '58px', 
-  }}
-/>
+              <img
+                src={`https://flagcdn.com/80x60/${currentCountry.ISOCode}.png`}
+                alt={currentCountry.name}
+                style={{
+                  width: '75px',
+                  height: '58px',
+                }}
+              />
 
             </div>
             <div className="answers-container">
@@ -207,7 +207,7 @@ function App() {
       )}
 
 
-           {screen === 'detail' && (
+      {screen === 'detail' && (
         <div className="details-screen">
           <h2>All Question Details</h2>
           <table className="details-table">

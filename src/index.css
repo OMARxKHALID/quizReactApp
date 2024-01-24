@@ -246,11 +246,10 @@ h1 {
         width: 100%;
         max-width: none;
         table-layout: fixed;
-
     }
 
     .details-table {
         word-wrap: break-word;
-        font-size: 0.7rem;
+        font-size: 0.78rem;
     }
 }

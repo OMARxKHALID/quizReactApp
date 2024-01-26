@@ -263,4 +263,9 @@ h1 {
         word-wrap: break-word;
         font-size: 0.78rem;
     }
+    .answer-button {
+        margin-bottom: 0.3em;
+        padding: 0.4em;
+        font-size: 0.85em;
+    }
 }

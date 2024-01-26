@@ -14,11 +14,13 @@ const App = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [questionDetails, setQuestionDetails] = useState([]);
   const [shuffledCountries, setShuffledCountries] = useState([]);
+  const [shuffleOptions, setShuffleOptions] = useState(true);
 
   const totalQuestions = 5;
 
   const startGame = () => {
     setShuffledCountries(shuffleArray([...countries]));
+    setShuffleOptions(true); 
     setScreen('question');
   };
 
@@ -34,6 +36,7 @@ const App = () => {
       setQuestionDetails((prevDetails) => [...prevDetails, details]);
       setSelectedAnswer(isCorrect);
       setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
+      setShuffleOptions(false); 
     }
   };
   const restartGame = () => {
@@ -74,7 +77,7 @@ const App = () => {
       .filter((_, index) => index !== correctCountryIndex)
       .slice(0, 3);
     answerOptions.push(currentCountry);
-    return shuffleArray(answerOptions);
+    return shuffleOptions ? shuffleArray(answerOptions) : answerOptions;
   };
 
   const downloadDetailsAsCSV = () => {

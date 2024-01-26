@@ -75,6 +75,7 @@ h1 {
 .game-status-display {
     display: flex;
     justify-content: space-between;
+    font-size: 1rem;
 }
 
 .scoreboard {
@@ -263,9 +264,18 @@ h1 {
         word-wrap: break-word;
         font-size: 0.78rem;
     }
+
     .answer-button {
         margin-bottom: 0.3em;
         padding: 0.4em;
         font-size: 0.85em;
+    }
+
+    .flag {
+        margin: 25px;
+    }
+
+    .game-status-display {
+        font-size: 0.9rem;
     }
 }

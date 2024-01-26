@@ -50,7 +50,10 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--dark);
-    padding-bottom: 1em;
+    padding: 0.6em;
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .flag {
@@ -193,8 +196,6 @@ h1 {
 }
 
 .details-screen {
-    margin-top: 3em;
-    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -205,7 +206,6 @@ h1 {
 .details-screen h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1em;
 }
 
 .details-table-container {
@@ -239,6 +239,7 @@ h1 {
 .incorrect-answer {
     color: red;
 }
+
 
 @media only screen and (max-width: 600px) {
 

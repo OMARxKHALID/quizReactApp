@@ -12,7 +12,7 @@ const QuestionScreen = ({
   getAnswerOptions,
 }) => {
   const currentCountry = shuffledCountries[currentQuestionIndex];
-  const answerOptions = getAnswerOptions();
+  const answerOptions = getAnswerOptions;
 
   return (
     <div className="game-container">
@@ -37,6 +37,7 @@ const QuestionScreen = ({
       <div className="question-container">
         <div className="flag">
           <img
+            loading='lazy'
             src={`https://flagcdn.com/80x60/${currentCountry.ISOCode}.png`}
             alt={currentCountry.name}
           />

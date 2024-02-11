@@ -22,6 +22,7 @@ const DetailScreen = ({
             <tr key={index}>
               <td>
                 <img
+                  loading="lazy"
                   src={`https://flagcdn.com/40x30/${detail.question.ISOCode}.png`}
                   alt={detail.question.name}
                 />

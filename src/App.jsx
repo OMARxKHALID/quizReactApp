@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import countries from './countries';
 import { saveAs } from 'file-saver';
 import StartScreen from './components/renderStartScreen';
 import QuestionScreen from './components/renderQuestionScreen';
 import EndScreen from './components/renderEndScreen';
 import DetailScreen from './components/renderDetailScreen';
+
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
 
   const startGame = () => {
     setShuffledCountries(shuffleArray([...countries]));
-    setShuffleOptions(true); 
+    setShuffleOptions(true);
     setScreen('question');
   };
 
@@ -36,9 +37,10 @@ const App = () => {
       setQuestionDetails((prevDetails) => [...prevDetails, details]);
       setSelectedAnswer(isCorrect);
       setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
-      setShuffleOptions(false); 
+      setShuffleOptions(false);
     }
   };
+
   const restartGame = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -68,7 +70,7 @@ const App = () => {
     setScreen('end');
   };
 
-  const getAnswerOptions = () => {
+  const getAnswerOptions = useMemo(() => {
     const currentCountry = shuffledCountries[currentQuestionIndex];
     const correctCountryIndex = shuffledCountries.findIndex(
       (country) => country.ISOCode === currentCountry.ISOCode
@@ -76,9 +78,12 @@ const App = () => {
     let answerOptions = shuffledCountries
       .filter((_, index) => index !== correctCountryIndex)
       .slice(0, 3);
-    answerOptions.push(currentCountry);
+
+    const randomIndex = Math.floor(Math.random() * 4);
+    answerOptions.splice(randomIndex, 0, currentCountry);
+
     return shuffleOptions ? shuffleArray(answerOptions) : answerOptions;
-  };
+  }, [currentQuestionIndex, shuffledCountries, shuffleOptions]);
 
   const downloadDetailsAsCSV = () => {
     try {
@@ -99,7 +104,6 @@ const App = () => {
       console.error('Error generating or downloading CSV:', error);
     }
   };
-
 
   const renderContent = () => {
     switch (screen) {

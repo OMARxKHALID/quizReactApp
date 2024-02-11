@@ -195,7 +195,9 @@ h1 {
 .next {
     width: 30%;
 }
-
+.p{
+    font-size: l2rem;
+}
 .details-screen {
     display: flex;
     justify-content: center;

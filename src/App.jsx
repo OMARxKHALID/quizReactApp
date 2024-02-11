@@ -21,7 +21,7 @@ const App = () => {
 
   const startGame = () => {
     setShuffledCountries(shuffleArray([...countries]));
-    setShuffleOptions(true);
+    setShuffleOptions(false);
     setScreen('question');
   };
 

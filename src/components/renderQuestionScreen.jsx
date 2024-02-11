@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ProgressBar from '../ProgressBar';
 
 const QuestionScreen = ({
@@ -9,10 +9,9 @@ const QuestionScreen = ({
   selectedAnswer,
   handleAnswerClick,
   nextQuestion,
-  getAnswerOptions,
+  answerOptions,
 }) => {
   const currentCountry = shuffledCountries[currentQuestionIndex];
-  const answerOptions = getAnswerOptions;
 
   return (
     <div className="game-container">
